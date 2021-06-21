@@ -7,8 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class WriteToCSV { private static final String CSV_HEADER = "FIRST_NAME,LAST_NAME,ADDRESS,CITY,STATE,PHONE,ZIP";
+public class WriteToCSV {
 
+    private static final String CSV_HEADER = "FIRST_NAME,LAST_NAME,ADDRESS,CITY,STATE,PHONE,ZIP";
     public static void writeAddCSV(List<Person> person)
     {
         FileWriter fileWriter = null;

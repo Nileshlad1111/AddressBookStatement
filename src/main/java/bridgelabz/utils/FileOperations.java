@@ -9,9 +9,9 @@ import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import jdk.nashorn.internal.parser.JSONParser;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.JSONArray;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -21,14 +21,12 @@ import java.util.LinkedList;
 
 public class FileOperations {
 
-    private Object JsonObject;
-
     public void convertToFile(LinkedList<Person> addressBook, String filePath, int fileOperations) throws JSONException {
         switch (fileOperations) {
             case 1:
-                JSONArray personList = new JSONArray();
+                org.json.simple.JSONArray personList = new JSONArray();
                 for (Person person : addressBook) {
-                    JSONObject personDetails = new JSONObject();
+                    org.json.simple.JSONObject personDetails = new org.json.simple.JSONObject();
                     personDetails.put("First Name", person.getFirstName());
                     personDetails.put("Last Name", person.getLastName());
                     personDetails.put("Phone", person.getPhone());
@@ -36,13 +34,13 @@ public class FileOperations {
                     personDetails.put("City", person.getCity());
                     personDetails.put("State", person.getState());
                     personDetails.put("Zip", person.getZip());
-                    JSONObject personObject = new JSONObject();
+                    org.json.simple.JSONObject personObject = new org.json.simple.JSONObject();
                     personObject.put("person", personDetails);
-                    personList.put(personObject);
+                    personList.add(personObject);
                 }
                 try {
                     FileWriter fileWriter = new FileWriter(filePath);
-                    fileWriter.append(personList.join(filePath));
+                    fileWriter.append(personList.toJSONString());
                     fileWriter.flush();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -69,17 +67,6 @@ public class FileOperations {
 
         switch (fileOperations) {
             case 1:
-               /* JSONParser jsonParser = new JSONParser(parseJSONObject((JSONObject) JsonObject));
-                try {
-                    FileReader fileReader = new FileReader(filePath);
-                    Object obj = jsonParser.parse(fileReader);
-                    JSONArray personList = (JSONArray) obj;
-                    personList.get(person -> addressBook.add(parseJSONObject((JSONObject) person)));
-                } catch (IOException | ParseException e) {
-                    e.printStackTrace();
-                }*/
-                break;
-            case 2:
                 try (
                         Reader reader = Files.newBufferedReader(Paths.get(filePath));
                         CSVReader csvReader = new CSVReader(reader)
@@ -96,7 +83,6 @@ public class FileOperations {
                                 nextPerson[4]));
                     }
                 }
-                break;
         }
 
         return addressBook;

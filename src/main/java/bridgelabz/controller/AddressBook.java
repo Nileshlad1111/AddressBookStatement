@@ -48,31 +48,31 @@ public class AddressBook {
             int choice = InputUtil.getIntValue();
             switch (choice) {
                 case 1:
-                    personList = fileOperations.getDataInList(filePath, operations);
+                    personList = (LinkedList<Person>) fileOperations.getDataInList(filePath, operations);
                     personList = addressBookService.addRecord(personList);
                     fileOperations.convertToFile(personList, filePath, operations);
                     break;
                 case 2:
-                    LinkedList<Person> person = fileOperations.getDataInList(filePath, operations);
+                    LinkedList<Person> person = (LinkedList<Person>) fileOperations.getDataInList(filePath, operations);
                     addressBookService.displayRecord(person);
                     break;
                 case 3:
-                    personList = fileOperations.getDataInList(filePath, operations);
+                    personList = (LinkedList<Person>) fileOperations.getDataInList(filePath, operations);
                     personList = addressBookService.editRecord(personList);
                     fileOperations.convertToFile(personList, filePath, operations);
 
                     break;
                 case 4:
-                    personList = fileOperations.getDataInList(filePath, operations);
+                    personList = (LinkedList<Person>) fileOperations.getDataInList(filePath, operations);
                     personList = addressBookService.deleteRecord(personList);
                     fileOperations.convertToFile(personList, filePath, operations);
                     break;
                 case 5:
-                    personList = fileOperations.getDataInList(filePath, operations);
+                    personList = (LinkedList<Person>) fileOperations.getDataInList(filePath, operations);
                     addressBookService.sortRecords(personList);
                     break;
                 case 6:
-                    personList = fileOperations.getDataInList(filePath, operations);
+                    personList = (LinkedList<Person>) fileOperations.getDataInList(filePath, operations);
                     addressBookService.searchInRecords(personList);
                     break;
                 case 7:

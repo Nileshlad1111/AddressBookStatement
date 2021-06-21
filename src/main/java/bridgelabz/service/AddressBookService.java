@@ -16,6 +16,9 @@ import java.util.List;
  */
 public class AddressBookService implements IAddressBookService {
 
+    /*Method Search the Person By City
+     * @Param Person List
+     */
     public static void searchByCity(List<Person> person) {
         String search;
         List<Person> matches = new ArrayList<>();
@@ -256,7 +259,5 @@ public class AddressBookService implements IAddressBookService {
                     System.out.println("Please Enter Correct Option...");
             }
         }
-    }}
-
-
-
+    }
+}
